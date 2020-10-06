@@ -47,7 +47,7 @@ public class MainViewController {
 				int amnt = scanner.nextInt();
 				try {
 					service.transfer(src, dest, amnt);
-				} catch (InsufficientResourcesException e) {
+				} catch (InsufficientResourcesException | AccountNotFoundException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
 				}

@@ -89,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
 
 
 	@Override
-	public void transfer(int sourceAccount, int destinationAccount, double amount) throws InsufficientResourcesException{
+	public void transfer(int sourceAccount, int destinationAccount, double amount) throws InsufficientResourcesException, AccountNotFoundException{
 		int flag1=0;
 		int flag2=0;
 		List<Account> accounts = accountDao.getAccounts();
@@ -105,12 +105,11 @@ public class AccountServiceImpl implements AccountService {
 			}
 		}
 		if(flag1!=1) {
-		//	throw new AccountNotFoundException("Source Account doesnot exist");
+			throw new AccountNotFoundException("Source Account doesnot exist");
 		}
 		else if(flag2!=1) {
-			
+			throw new AccountNotFoundException("Destination Account doesnot exist");
 		}
-		//	throw new AccountNotFoundException("Destination Account doesnot exist");
 		
 		else {
 			if(src.getBalance()<amount) {
